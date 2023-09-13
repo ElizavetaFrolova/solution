@@ -20,5 +20,5 @@ int main() {
 		cout << exl << endl;
 	}
 	delete[] arr;
-
+	return 0;
 }

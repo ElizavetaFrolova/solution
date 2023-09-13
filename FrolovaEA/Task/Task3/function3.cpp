@@ -24,7 +24,7 @@ int size_determination(int n, int* originalArr)
 	for (int i = 1; i < n; i++)
 	{
 		flag = true;
-		for (int j = i + 1; j <= n - 1; j++)
+		for (int j = 0; j < i; j++)
 		{
 			if (originalArr[i] == originalArr[j])
 			{
@@ -45,13 +45,14 @@ int size_determination(int n, int* originalArr)
 
 void remove_repetitions(int n, int* originalArr, int*& newArr)
 {
+
 	int k = 1;
 	bool flag = true;
 	newArr[0] = originalArr[0];
 	for (int i = 1; i < n; i++)
 	{
 		flag = true;
-		for (int j = i + 1; j <= n - 1; j++)
+		for (int j = 0; j < i; j++)
 		{
 			if (originalArr[i] == originalArr[j])
 			{

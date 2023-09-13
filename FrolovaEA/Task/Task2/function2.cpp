@@ -21,7 +21,7 @@ void scan(int& n, int*& arr)
 		cin >> arr[i];
 }
 
-void switching_places(int& n, int*& arr)
+void switching_places(int n, int* arr)
 {
 
 	for (int i = 0; i < n / 2; i++)
