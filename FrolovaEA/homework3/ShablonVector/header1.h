@@ -19,8 +19,21 @@ public:
 
 	// ѕерегрузка операций
 	T& operator[](int index);
-	Vector& operator=(const Vector& vec);
-	//	friend ostream& operator<<(ostream& os, const Vector<T>& v);
+	const Vector& operator=(const Vector& vec);
+	friend ostream& operator<<(ostream& os, const Vector<T>& v)
+	{
+		os << "Vector: (";
+		for (int i = 0; i < v.count; i++)
+			{
+				os << v.memo[i];
+				if (i == v.count - 1)
+					os << ")\n";
+				else
+					os << ",";
+			}
+		return os;
+		
+	}
 	template<class T>
 	friend Vector<T> operator*(T d, const Vector<T>& vec); // умножени€ скал€ра на вектор
 };
@@ -91,7 +104,7 @@ T& Vector<T>::operator[](int index) {
 }
 
 template<class T>
-Vector<T>& Vector<T>::operator=(const Vector<T>& vec)
+const Vector<T>& Vector<T>::operator=(const Vector<T>& vec)
 {
 	if (this != &vec)
 	{

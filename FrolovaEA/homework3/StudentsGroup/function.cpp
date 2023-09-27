@@ -17,7 +17,7 @@ Students::Students()
     data.year = 0;
 }
 
-Students::Students(string name, string surname, string patronymic, long long phoneNmber, int day, int month, int year)
+Students::Students(const string& name, const string& surname, const string& patronymic, long long phoneNmber, int day, int month, int year)
 {
     this->name = name;
     this->surname = surname;
@@ -29,18 +29,7 @@ Students::Students(string name, string surname, string patronymic, long long pho
 
 }
 
-void Students::SetStudents(string _surname, string _name, string _patronymic, long long _phoneNmber, int _day, int _month, int _year)
-{
-    surname = _surname;
-    name = _name;
-    patronymic = _patronymic;
-    phoneNmber = _phoneNmber;
-    data.day = _day;
-    data.month = _month;
-    data.year = _year;
-}
-
-Students& Students::operator=(const Students& _str)
+const Students& Students::operator=(const Students& _str)
 {
     name = _str.name;
     surname = _str.surname;
@@ -52,17 +41,6 @@ Students& Students::operator=(const Students& _str)
     return *this;
 }
 
-void Students::SetRes(string _surname, string _name, string _patronymic, long long _phoneNmber, int _day, int _month, int _year)
-{
-    name = _name;
-    surname = _surname;
-    patronymic = _patronymic;
-    phoneNmber = _phoneNmber;
-    data.day = _day;
-    data.month = _month;
-    data.year = _year;
-
-}
 
 ostream& operator <<(ostream& stream, const Students& p)
 {
@@ -75,6 +53,14 @@ Group::Group(int size, Students* a, int max_size)
     this->size = size;
     students = a;
     this->max_size = max_size;
+}
+
+Group::Group(int size, const string filename, int max_size)
+{
+    this->size = size;
+    this->max_size = max_size;
+    allocate_stock(students, size);
+    fill_sklad(students, size,filename);
 }
 
 Group::~Group()
@@ -105,9 +91,9 @@ void Group::find_Name()
     int k = 0;
     for (int i = 0; i < size; i++)
     {
-        if (students[i].GetName() == str) {
-            cout << students[i].GetSurname() << "\t" << students[i].GetName() << "\t" << students[i].GetPatronymic() << "\t" << students[i].GetPhoneNumber() << "\t";
-            cout << setw(2) << setfill('0') << students[i].GetDay() << "." << setw(2) << setfill('0') << students[i].GetMonth() << "." << students[i].GetYear() << endl;
+        if (students[i].name == str) {
+            cout << students[i].name << "\t" << students[i].surname << "\t" << students[i].patronymic << "\t" << students[i].phoneNmber << "\t";
+            cout << setw(2) << setfill('0') << students[i].data.day << "." << setw(2) << setfill('0') << students[i].data.month << "." << students[i].data.year << endl;
             k++;
         }
 
@@ -126,9 +112,9 @@ void Group::find_Surname()
     int k = 0;
     for (int i = 0; i < size; i++)
     {
-        if (students[i].GetSurname() == str) {
-            cout << students[i].GetSurname() << "\t" << students[i].GetName() << "\t" << students[i].GetPatronymic() << "\t" << students[i].GetPhoneNumber() << "\t";
-            cout << setw(2) << setfill('0') << students[i].GetDay() << "." << setw(2) << setfill('0') << students[i].GetMonth() << "." << students[i].GetYear() << endl;
+        if (students[i].surname == str) {
+            cout << students[i].name << "\t" << students[i].surname << "\t" << students[i].patronymic << "\t" << students[i].phoneNmber << "\t";
+            cout << setw(2) << setfill('0') << students[i].data.day << "." << setw(2) << setfill('0') << students[i].data.month << "." << students[i].data.year << endl;
             k++;
         }
 
@@ -147,9 +133,9 @@ void Group::find_Patronymic()
     int k = 0;
     for (int i = 0; i < size; i++)
     {
-        if (students[i].GetPatronymic() == str) {
-            cout << students[i].GetSurname() << "\t" << students[i].GetName() << "\t" << students[i].GetPatronymic() << "\t" << students[i].GetPhoneNumber() << "\t";
-            cout << setw(2) << setfill('0') << students[i].GetDay() << "." << setw(2) << setfill('0') << students[i].GetMonth() << "." << students[i].GetYear() << endl;
+        if (students[i].patronymic == str) {
+            cout << students[i].name << "\t" << students[i].surname << "\t" << students[i].patronymic << "\t" << students[i].phoneNmber << "\t";
+            cout << setw(2) << setfill('0') << students[i].data.day << "." << setw(2) << setfill('0') << students[i].data.month << "." << students[i].data.year << endl;
             k++;
         }
 
@@ -168,9 +154,9 @@ void Group::find_PhoneNmber()
     int k = 0;
     for (int i = 0; i < size; i++)
     {
-        if (students[i].GetPhoneNumber() == str) {
-            cout << students[i].GetSurname() << "\t" << students[i].GetName() << "\t" << students[i].GetPatronymic() << "\t" << students[i].GetPhoneNumber() << "\t";
-            cout << setw(2) << setfill('0') << students[i].GetDay() << "." << setw(2) << setfill('0') << students[i].GetMonth() << "." << students[i].GetYear() << endl;
+        if (students[i].phoneNmber == str) {
+            cout << students[i].name << "\t" << students[i].surname << "\t" << students[i].patronymic << "\t" << students[i].phoneNmber << "\t";
+            cout << setw(2) << setfill('0') << students[i].data.day << "." << setw(2) << setfill('0') << students[i].data.month << "." << students[i].data.year << endl;
             k++;
         }
 
@@ -197,9 +183,9 @@ void Group::find_Data()
     int k = 0;
     for (int i = 0; i < size; i++)
     {
-        if ((students[i].GetDay() == _day) && (students[i].GetMonth() == _month) && (students[i].GetYear() == _year)) {
-            cout << students[i].GetSurname() << "\t" << students[i].GetName() << "\t" << students[i].GetPatronymic() << "\t" << students[i].GetPhoneNumber() << "\t";
-            cout << setw(2) << setfill('0') << students[i].GetDay() << "." << setw(2) << setfill('0') << students[i].GetMonth() << "." << students[i].GetYear() << endl;
+        if ((students[i].data.day == _day) && (students[i].data.month == _month) && (students[i].data.year == _year)) {
+            cout << students[i].name << "\t" << students[i].surname << "\t" << students[i].patronymic << "\t" << students[i].phoneNmber << "\t";
+            cout << setw(2) << setfill('0') << students[i].data.day << "." << setw(2) << setfill('0') << students[i].data.month << "." << students[i].data.year << endl;
             k++;
         }
 
@@ -251,7 +237,13 @@ void Group::AddStudent()
     cout << "enter year: ";
     cin >> _year;
     cout << endl;
-    students[size].SetRes(_name, _surname, _patronymic, _phoneNmber, _day, _month, _year);
+    students[size].name = _name;
+    students[size].surname = _surname;
+    students[size].patronymic = _patronymic;
+    students[size].phoneNmber = _phoneNmber;
+    students[size].data.day = _day;
+    students[size].data.month = _month;
+    students[size].data.year = _year;
     size++;
 }
 
@@ -332,7 +324,6 @@ void fill_sklad(Students*& p, int size, const string filename)
                 int _day = 0;
                 int _month = 0;
                 int _year = 0;
-
                 strcpy(str, line.c_str());
                 istr = strtok(str, ";/");
                 flag++;
@@ -373,7 +364,14 @@ void fill_sklad(Students*& p, int size, const string filename)
                     if (flag == 7) {
                         _year = atoi(istr);
                     //    cout << _year << endl;
-                        p[j].SetRes(_surname, _name, _patronymic, _phoneNmber, _day, _month, _year);
+                        p[j].name = _name;
+                        p[j].surname = _surname;
+                        p[j].patronymic = _patronymic;
+                        p[j].phoneNmber = _phoneNmber;
+                        p[j].data.day = _day;
+                        p[j].data.month = _month;
+                        p[j].data.year = _year;
+                        
                     }
 
 

@@ -32,6 +32,7 @@ int main()
 	Vector<int> vIn(vCount, itArr);
 	cout << "nachalnae znachenia vIn:" << endl;
 	vIn.outPut("vIn");
+	cout << vIn << endl;
 	cout << "vIn[2] = " << vIn[2] << endl;
 	vIn[3] = 5;
 	cout << "vIn[3] = 5" << endl;

@@ -13,7 +13,7 @@ struct Date
 
 class Students
 {
-private:
+public:
 
 	string name;
 	string surname;
@@ -23,26 +23,10 @@ private:
 
 public:
 	Students(void);
-	Students(string name, string surname, string patronymic, long long phoneNmber, int day, int month, int year);
-
-	void SetName(string _name) { name = _name; }
-	void SetSurname(string _surname) { surname = _surname; }
-	void SetPatronymic(string _patronymic) { patronymic = _patronymic; }
-	void SetPhoneNmber(long long _phoneNmber) { phoneNmber = _phoneNmber; }
-	void SetData(int _day, int _month, int _year) { data.day = _day; data.month = _month; data.year = _year; }
-	void SetStudents(string _surname, string _name, string _patronymic, long long _phoneNmber, int _day, int _month, int _year);
-	void SetRes(string _name, string _surname, string _patronymic, long long _phoneNmber, int _day, int _month, int _year);
-
-	string GetName()const { return name; }
-	string GetSurname()const { return surname; }
-	string GetPatronymic()const { return patronymic; }
-	long long GetPhoneNumber()const { return phoneNmber;}
-	int GetDay()const { return data.day; }
-	int GetMonth()const { return data.month; }
-	int GetYear()const { return data.year; }
+	Students(const string& name, const string& surname, const string& patronymic, long long phoneNmber, int day, int month, int year);
 
 	friend ostream& operator <<(ostream& stream, const Students& p);
-	Students& operator=(const Students& _str);
+	const Students& operator=(const Students& _str);
 };
 
 class Group
@@ -56,6 +40,7 @@ private:
 
 public:
 	Group(int size, Students* a, int max_size);
+	Group(int size, const string filename, int max_size);
 	~Group();
 
 	Students& operator[](int index)const;

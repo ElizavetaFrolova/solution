@@ -16,11 +16,12 @@ int main()
 
     cout << size << endl;
 
-    allocate_stock(p, size);
+//    allocate_stock(p, size);
 
-    fill_sklad(p, size, "students.txt");
+//    fill_sklad(p, size, "students.txt");
 
-    Group StudGroup(size, p, size);
+//    Group StudGroup(size, p, size);
+	Group StudGroup(size, "students.txt", size);
 
     StudGroup.print();
 
