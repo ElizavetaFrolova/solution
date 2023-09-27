@@ -1,0 +1,11 @@
+Lykov;Mikhail;Yurievich;89049023435;12/04/2004
+Tsareva;Maria;Timofeevna;89653451221;09/05/2005
+Grishin;Mikhail;Mikhailovich;89765643123;27/12/2004
+Antonova;Olivia;Romanovna;89001003040;10/04/2004
+Bykova;Margarita;Daniilovna;89554673201;11/09/2004
+Kulikova;Anna;Vladislavovna;89767217272;05/04/2005 
+Mikhailova;Darya;Ivanovna;89009991919;19/08/2004
+Vlasova;Anna;Daniilovna;85554443322;01/06/2004
+Dolgov;Fyodor;Mikhailovich;89097076655;11/04/2004
+Petukhova;Sofya;Konstantinovna;89514219876;23/11/2005 
+Dolgov;Mark;Mikhailovich;89734689052;11/04/2004
