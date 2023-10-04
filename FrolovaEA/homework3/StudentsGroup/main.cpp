@@ -6,26 +6,20 @@
 #include <iomanip>
 
 #include "header.h"
+#include "DateArr.h"
+
 using namespace std;
 
 int main()
 {
-    Students* p;
 
     int size = cntLines("students.txt");
 
     cout << size << endl;
 
-//    allocate_stock(p, size);
-
-//    fill_sklad(p, size, "students.txt");
-
-//    Group StudGroup(size, p, size);
 	Group StudGroup(size, "students.txt", size);
 
-    StudGroup.print();
-
-//	StudGroup.AddStudent();
+    cout<<StudGroup<<endl;
 
 	int level1{}, level0{};
 	do {
@@ -44,46 +38,161 @@ int main()
 		if (!cin) {
 			cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			cout << "ERROR. Please enter numbers only: 1 - 8" << endl;
+			cout << "ERROR. Please enter numbers only: 1 - 9" << endl;
 		}
 		switch (level1) {
 		case 1:
-			StudGroup.find_Name();
-			
+		{
+			string str;
+			cout << "enter name: ";
+			cin >> str;
+			cout << endl;
+			Arr index = StudGroup.find_Name(str);
+			if (index.number == 0)
+				cout << "name not found" << endl;
+			if (index.number != 0)
+			{
+				for (int i = 0; i < index.number; i++)
+				{
+					cout<<StudGroup.GetStudents(index.arr[i]) << endl;
+				}
+			}
+
+		}	
 			break;
 		case 2:
-			StudGroup.find_Surname();
+		{
+			string str;
+			cout << "enter sourname: ";
+			cin >> str;
+			cout << endl;
+			Arr index = StudGroup.find_Surname(str);
+			if (index.number == 0)
+				cout << "sourname not found" << endl;
+			if (index.number != 0)
+			{
+				for (int i = 0; i < index.number; i++)
+				{
+					cout << StudGroup.GetStudents(index.arr[i]) << endl;
+				}
+			}
+		}
 
 			break;
 		case 3:
-			StudGroup.find_Patronymic();
+		{
+			string str;
+			cout << "enter patronymic: ";
+			cin >> str;
+			cout << endl;
+			Arr index = StudGroup.find_Patronymic(str);
+			if (index.number == 0)
+				cout << "patronumic not found" << endl;
+			if (index.number != 0)
+			{
+				for (int i = 0; i < index.number; i++)
+				{
+					cout << StudGroup.GetStudents(index.arr[i]) << endl;
+				}
+			}
+		}
 			break;
 		case 4:
-			StudGroup.find_PhoneNmber();
+		{
+			long long str;
+			cout << "enter phoneNmber: ";
+			cin >> str;
+			cout << endl;
+			int k = 0;
+
+			k = StudGroup.find_PhoneNmber(str);
+			if (k != -1) {
+				cout << StudGroup.GetStudents(k);
+			}
+			if (k == -1) {
+				cout << "phonenimber not found" << endl;
+			}
+		}
 			break;
 		case 5:
-			StudGroup.find_Data();
+		{
+			int _day;
+			int _month;
+			int _year;
+			cout << "enter day: ";
+			cin >> _day;
+			cout << endl;
+			cout << "enter month: ";
+			cin >> _month;
+			cout << endl;
+			cout << "enter year: ";
+			cin >> _year;
+			cout << endl;
+			Arr index = StudGroup.find_Data(_day, _month, _year);
+			if (index.number == 0)
+				cout << "date not found" << endl;
+			if (index.number != 0)
+			{
+				for (int i = 0; i < index.number; i++)
+				{
+					cout << StudGroup.GetStudents(index.arr[i]) << endl;
+				}
+			}
+		}
 			break;
 		case 6:
-			StudGroup.print();
+
+			cout << StudGroup << endl;
+
 			break;
+
 		case 7:
-			StudGroup.AddStudent();
+		{
+			string name, sourname, patronumic;
+			long long phonenumber;
+			int day, month, year;
+			cout << "enter name : ";
+			cin >> name;
+			cout << endl;
+			cout << "enter sourname : ";
+			cin >> sourname;
+			cout << endl;
+			cout << "enter patronumic : ";
+			cin >> patronumic;
+			cout << endl;
+			cout << "enter phonenumber : ";
+			cin >> phonenumber;
+			cout << endl;
+			cout << "enter day : ";
+			cin >> day;
+			cout << endl;
+			cout << "enter month : ";
+			cin >> month;
+			cout << endl;
+			cout << "enter year : ";
+			cin >> year;
+			cout << endl;
+			StudGroup.AddStudent(name, sourname, patronumic, phonenumber, day, month, year);
+		}
 			break;
 		case 8:
-			StudGroup.DeleteStudent();
+		{
+			int index;
+			cout<<StudGroup<<endl;
+			cout << "enter index: ";
+			cin >> index;
+			while ((index < 1) || (index > StudGroup.GetSize()))
+			{
+				cout << "enter index: ";
+				cin >> index;
+			}
+			StudGroup.DeleteStudent(index);
+		}
 			break;
 		default:
 			break;
 		}
 	} while (level1 != 9);
 
-	
- //   StudGroup.find_Name(size);
- //   StudGroup.find_Surname(size);
- //   StudGroup.find_Patronymic(size);
- //   StudGroup.find_PhoneNmber(size);
- //   StudGroup.find_Data(size);
-//    delete[] p;
     return 0;
 }

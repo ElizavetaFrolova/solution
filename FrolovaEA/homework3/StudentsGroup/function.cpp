@@ -4,6 +4,8 @@
 #include <string>
 #include <iomanip>
 #include "header.h"
+#include "DateArr.h"
+
 using namespace std;
 
 Students::Students()
@@ -44,7 +46,8 @@ const Students& Students::operator=(const Students& _str)
 
 ostream& operator <<(ostream& stream, const Students& p)
 {
-    stream << p.surname << " " << p.name << " " << p.patronymic << " " << p.phoneNmber << " " << p.data.day << "/" << p.data.month << "/" << p.data.year << endl;
+    stream << p.surname << " " << p.name << " " << p.patronymic << " " << p.phoneNmber
+        << " " << setw(2) << setfill('0') << p.data.day << "/" << setw(2) << setfill('0') << p.data.month << "/" << p.data.year << endl;
     return stream;
 }
 
@@ -75,124 +78,96 @@ Students& Group::operator[](int index) const
     }
     return students[index];
 }
-
+/*
 void Group::print()
 {
     for (int i = 0; i < size; i++)
         cout << i+1 << ":" << students[i] << endl;
 }
+*/
 
-void Group::find_Name()
+Arr Group::find_Name(const string& str)
 {
-    string str;
-    cout << "enter name: ";
-    cin >> str;
-    cout << endl;
     int k = 0;
     for (int i = 0; i < size; i++)
     {
         if (students[i].name == str) {
-            cout << students[i].name << "\t" << students[i].surname << "\t" << students[i].patronymic << "\t" << students[i].phoneNmber << "\t";
-            cout << setw(2) << setfill('0') << students[i].data.day << "." << setw(2) << setfill('0') << students[i].data.month << "." << students[i].data.year << endl;
             k++;
         }
-
     }
-    if (k == 0) {
-        cout << "name not found" << endl;
+    Arr index(k);
+    int num = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (students[i].name == str) {
+            index.arr[num] = i;
+            num++;
+        }
     }
+    return index;
 }
 
-void Group::find_Surname()
+Arr Group::find_Surname(const string& str)
 {
-    string str;
-    cout << "enter surname: ";
-    cin >> str;
-    cout << endl;
     int k = 0;
     for (int i = 0; i < size; i++)
     {
         if (students[i].surname == str) {
-            cout << students[i].name << "\t" << students[i].surname << "\t" << students[i].patronymic << "\t" << students[i].phoneNmber << "\t";
-            cout << setw(2) << setfill('0') << students[i].data.day << "." << setw(2) << setfill('0') << students[i].data.month << "." << students[i].data.year << endl;
             k++;
         }
-
     }
-    if (k == 0) {
-        cout << "name not found" << endl;
+    Arr index(k);
+    int num = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (students[i].surname == str) {
+            index.arr[num] = i;
+            num++;
+        }
     }
+    return index;
 }
 
-void Group::find_Patronymic()
+Arr Group::find_Patronymic(const string& str)
 {
-    string str;
-    cout << "enter patronymic: ";
-    cin >> str;
-    cout << endl;
     int k = 0;
     for (int i = 0; i < size; i++)
     {
         if (students[i].patronymic == str) {
-            cout << students[i].name << "\t" << students[i].surname << "\t" << students[i].patronymic << "\t" << students[i].phoneNmber << "\t";
-            cout << setw(2) << setfill('0') << students[i].data.day << "." << setw(2) << setfill('0') << students[i].data.month << "." << students[i].data.year << endl;
             k++;
         }
-
     }
-    if (k == 0) {
-        cout << "name not found" << endl;
-    }
-}
-
-void Group::find_PhoneNmber()
-{
-    long long str;
-    cout << "enter phoneNmber: ";
-    cin >> str;
-    cout << endl;
-    int k = 0;
+    Arr index(k);
+    int num = 0;
     for (int i = 0; i < size; i++)
     {
-        if (students[i].phoneNmber == str) {
-            cout << students[i].name << "\t" << students[i].surname << "\t" << students[i].patronymic << "\t" << students[i].phoneNmber << "\t";
-            cout << setw(2) << setfill('0') << students[i].data.day << "." << setw(2) << setfill('0') << students[i].data.month << "." << students[i].data.year << endl;
-            k++;
+        if (students[i].patronymic == str) {
+            index.arr[num] = i;
+            num++;
         }
-
     }
-    if (k == 0) {
-        cout << "name not found" << endl;
-    }
+    return index;
 }
 
-void Group::find_Data()
+Arr Group::find_Data(int _day, int _month, int _year)
 {
-    int _day;
-    int _month;
-    int _year;
-    cout << "enter day: ";
-    cin >> _day;
-    cout << endl;
-    cout << "enter month: ";
-    cin >> _month;
-    cout << endl;
-    cout << "enter year: ";
-    cin >> _year;
-    cout << endl;
-    int k = 0;
+   int k = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if ((students[i].data.day == _day)&& (students[i].data.month == _month) && (students[i].data.year == _year)) {
+            k++;
+        }
+    }
+    Arr index(k);
+    int num = 0;
     for (int i = 0; i < size; i++)
     {
         if ((students[i].data.day == _day) && (students[i].data.month == _month) && (students[i].data.year == _year)) {
-            cout << students[i].name << "\t" << students[i].surname << "\t" << students[i].patronymic << "\t" << students[i].phoneNmber << "\t";
-            cout << setw(2) << setfill('0') << students[i].data.day << "." << setw(2) << setfill('0') << students[i].data.month << "." << students[i].data.year << endl;
-            k++;
+            index.arr[num] = i;
+            num++;
         }
-
     }
-    if (k == 0) {
-        cout << "name not found" << endl;
-    }
+    return index;
 }
 
 void Group::realloc()
@@ -207,36 +182,11 @@ void Group::realloc()
     students = tmp;
 }
 
-void Group::AddStudent()
+void Group::AddStudent(const string& _name, const string& _surname, const string& _patronymic, long long _phoneNmber, int _day, int _month, int _year)
 {
     if (size == max_size) {
         realloc();
     }
-    string _name,_surname,_patronymic;
-    long long  _phoneNmber;
-    int _day, _month, _year;
-
-    cout << "enter name: ";
-    cin >> _name;
-    cout << endl;
-    cout << "enter sourname: ";
-    cin >> _surname;
-    cout << endl;
-    cout << "enter patronymic: ";
-    cin >> _patronymic;
-    cout << endl;
-    cout << "enter phoneNmber: ";
-    cin >> _phoneNmber;
-    cout << endl;
-    cout << "enter day: ";
-    cin >> _day;
-    cout << endl;
-    cout << "enter month: ";
-    cin >> _month;
-    cout << endl;
-    cout << "enter year: ";
-    cin >> _year;
-    cout << endl;
     students[size].name = _name;
     students[size].surname = _surname;
     students[size].patronymic = _patronymic;
@@ -247,12 +197,8 @@ void Group::AddStudent()
     size++;
 }
 
-void Group::DeleteStudent()
+void Group::DeleteStudent(int index)
 {
-    int index;
-    print();
-    cout << "enter index: ";
-    cin >> index;
     while ((index < 1) || (index > size))
     {
         cout << "enter index: ";
@@ -271,6 +217,25 @@ void Group::DeleteStudent()
     size--;
     delete[] students;
     students = tmp;
+}
+
+int Group::find_PhoneNmber(long long number)
+{
+    int k = -1;
+    for (int i = 0; i < size; i++)
+    {
+        if (students[i].phoneNmber == number) {
+            k=i;
+        }
+    }
+    return k;
+}
+
+ostream& operator<<(ostream& stream, const Group& p)
+{
+    for(int i=0;i<p.size;i++)
+    stream <<i<<" : "<<p.students[i] << endl;
+    return stream;
 }
 
 int cntLines(const string filename)
