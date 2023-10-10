@@ -208,7 +208,7 @@ double Vector<T>::mod() const
 {
 	T ans = 0;
 	for (int i = 0; i < count; i++)
-		ans += memo[i] * memo[i];
+		ans += (memo[i] * memo[i]);
 	return sqrt((double)ans);
 }
 

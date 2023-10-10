@@ -26,7 +26,7 @@ int main()
 	cout << "vector 3 :" << IntVec3 << endl;
 //	a = IntVec1.lenght();
 	
-//	cout << "lenght vector 1" << IntVec1.mod() << endl;
+	cout << "lenght vector 1" << IntVec1.mod() << endl;
 
 //	cout << "lenght vector 2" << IntVec2.mod() << endl;
 //	cout << "lenght vector 3" << IntVec3.mod() << endl;

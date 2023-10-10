@@ -199,12 +199,7 @@ void Group::AddStudent(const string& _name, const string& _surname, const string
 
 void Group::DeleteStudent(int index)
 {
-    while ((index < 1) || (index > size))
-    {
-        cout << "enter index: ";
-        cin >> index;
-    }
-    int pocition = index - 1;
+    int pocition = index ;
     Students* tmp=new Students[max_size];
     for (int i = 0; i < pocition; i++)
     {
